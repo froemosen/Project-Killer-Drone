@@ -6,8 +6,11 @@ import av
 import cv2.cv2 as cv2  # for avoidance of pylint error
 import numpy
 import time
+import keyboard
+import uuid
 
-person = "Kristian"
+person = "Mark" #Write person to take images of here
+personPath = f"/Images/{person}/"
 
 cascPath = "haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascPath)
@@ -47,28 +50,34 @@ def main():
                 #Detect faces in image
                 faces = faceCascade.detectMultiScale(
                     gray,
-                    scaleFactor=1.1,
+                    scaleFactor=1.2,
                     minNeighbors=5,
                     minSize=(30, 30)
-                )
+                )       
                 
-                print(f"Found {len(faces)} faces")
+                #print(f"Found {len(faces)} faces")
                 
-                if len(faces) == 1:
+                if len(faces) == 1: #If only one face is detected
                     for (x, y, w, h) in faces:
                         cv2.rectangle(image, (x,y), (x+w, y+h), (0,0,255), 2)
-                                
-
+                    
+                    if keyboard.is_pressed("space"): #If image is being taken (spacebar is pressed down)
+                        face = image[y: y+h, x: x+w]
+                        status = cv2.imwrite(f"D:\Project-Killer-Drone\Images\{person}\{uuid.uuid1()}.png", face)
+                        print(f"Image saved? - {status}")
+                    
+                                   
                 cv2.imshow(f'GetPerson {person}', image)
                 cv2.waitKey(1)
-                
                 
                 if frame.time_base < 1.0/60:
                     time_base = 1.0/60
                 else:
                     time_base = frame.time_base
                 frame_skip = int((time.time() - start_time)/time_base)
-            
+                
+                
+                   
                     
 
     except Exception as ex:
