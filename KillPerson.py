@@ -47,8 +47,6 @@ def predict(image):
 
 def main():
     drone = tellopy.Tello()
-    currentThrottle = 0.0
-    currentYaw = 0.0
     found = False
 
     try:
@@ -136,7 +134,7 @@ def main():
                     drone.set_throttle(0)
                     
                 if found == False:
-                        drone.set_yaw(0.2) #Turn around and search
+                    drone.set_yaw(0.2) #Turn around and search
                                   
                 if keyboard.is_pressed("space"): drone.land()
                     
