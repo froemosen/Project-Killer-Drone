@@ -1,3 +1,4 @@
-0 Kristian
-1 Lac
-2 Mark
+0 Other
+1 Mark
+2 Kristian
+3 Lac

@@ -9,7 +9,7 @@ import time
 import keyboard
 import uuid
 
-person = "Mark" #Write person to take images of here
+person = "Other" #Write person to take images of here
 personPath = f"/Images/{person}/"
 
 cascPath = "haarcascade_frontalface_default.xml"
@@ -57,7 +57,7 @@ def main():
                 
                 #print(f"Found {len(faces)} faces")
                 
-                if len(faces) == 1: #If only one face is detected
+                if len(faces) <= 1: #If only one face is detected
                     for (x, y, w, h) in faces:
                         cv2.rectangle(image, (x,y), (x+w, y+h), (0,0,255), 2)
                     
